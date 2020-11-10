@@ -14,7 +14,6 @@
                     @contextmenu.prevent.native="openMenu(tag,$event)"
             >
 <!--                <i :class="isActive(tag)?'el-icon-phone':''"></i>-->
-
                 <div style="" :class="isActive(tag)?'el-tag-circle':''"></div>
                 {{tag.name}}
             </el-tag>

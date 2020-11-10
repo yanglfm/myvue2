@@ -10,6 +10,7 @@ const getters = {
     cachedViews: state => state.tagsView.cachedViews,
     rightNav: state => state.tagsView.rightNav,
     sidebar: state => state.app.sidebar,
+    usernameCanUse:state=>state.user.usernameCanUse,
 
 }
 export default getters

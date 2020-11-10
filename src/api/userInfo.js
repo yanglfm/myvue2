@@ -1,11 +1,19 @@
 import request from './request'
 
-export function changeUsername(username) {
+export function checkUsername(username) {
     return request({
-        url: '/user/changeUsername',
+        url: '/user/checkUsername',
         method: 'get',
         params: {
             username: username
         }
+    })
+}
+
+export function editUserInfo(userInfo) {
+    return request({
+        url: '/user/editUserInfo',
+        method: 'post',
+        data: userInfo,
     })
 }

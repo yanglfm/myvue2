@@ -1,21 +1,21 @@
 <template>
     <div>
-        <el-dialog title="用户信息" :visible.sync="dialogVisible" @close="closeCallback">
+        <el-dialog title="用户信息" :visible.sync="dialogVisible" :rules="rules" :status-icon=true  @close="closeCallback">
             <el-form :model="form">
-                <el-form-item label="用户名" :label-width="formLabelWidth">
-                    <el-input v-model="form.username" autocomplete="off" @input="doChangeUsername"></el-input>
+                <el-form-item label="用户名" :label-width="formLabelWidth" required prop="username">
+                    <el-input v-model="form.username" autocomplete="off" @input="doCheckUsername"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" :label-width="formLabelWidth">
-                    <el-input v-model="form.password" autocomplete="off"></el-input>
+                <el-form-item label="密码" :label-width="formLabelWidth" required prop="password">
+                    <el-input  v-model="form.password" autocomplete="off"  type="password" show-password ></el-input>
                 </el-form-item>
-                <el-form-item label="手机号" :label-width="formLabelWidth">
+                <el-form-item label="手机号" :label-width="formLabelWidth" required prop="phone">
                     <el-input v-model="form.phone" autocomplete="off"></el-input>
                 </el-form-item>
 
                 <!--                <el-form-item label="创建时间" :label-width="formLabelWidth"  disabled="true">-->
                 <!--                    <el-input v-model="form.createTime" disabled ></el-input>-->
                 <!--                </el-form-item>-->
-                <el-form-item label="创建时间" :label-width="formLabelWidth">
+                <el-form-item label="创建时间" :label-width="formLabelWidth" prop="createTime">
                     <el-col>
                         <el-date-picker type="date" placeholder="选择日期" v-model="form.createTime"
                                         style="width: 100%;" disabled></el-date-picker>
@@ -33,6 +33,7 @@
 <script>
     export default {
         name: "userForm",
+
         props: {
             dialogVisible: {
                 type: Boolean
@@ -84,15 +85,24 @@
                       desc: ''
                   },*/
                 form: this.$store.getters.user,
-                formLabelWidth: '120px'
+                formLabelWidth: '120px',
+                rules:{
+                    username:[
+                        { required: true, message: '请输入用户名', trigger: 'blur' },
+                        { min: 3, max: 18, message: '长度在 3 到 18 个字符', trigger: 'blur' }
+                    ],
+                },
             };
         },
         methods: {
             /**
              * 监听用户输入的用户名，避免输入的用户名与已存在的6用户名重复
              * */
-            doChangeUsername() {
-                console.log(this.form.username)
+            doCheckUsername() {
+                console.log(this.form.username);
+                this.$store.dispatch('CheckUsername', this.form.username).then(res=>{
+                    console.log(res)
+                })
             },
             //获取的时间对象转字符串
             // Transformation(times) {

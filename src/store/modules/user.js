@@ -1,5 +1,6 @@
 import {getToken, setToken, removeToken} from "../../utils/auth";
 import {addWebLog, getWebLogList, login, loginOut, userInfo} from "../../api/login";
+import {checkUsername, editUserInfo} from "../../api/userInfo";
 
 const user = {
     state: {
@@ -7,7 +8,8 @@ const user = {
         username: '',
         user: {},
         roles: [],//用户角色列表
-        menus: []//菜单列表
+        menus: [],//菜单列表
+        usernameCanUse: false,
     },
     mutations: {
         SET_TOKEN: (state, token) => {
@@ -32,6 +34,13 @@ const user = {
         SET_WEB_LOG: (state, webLog) => {
 
         }
+        ,
+        /**
+         * 判定用户名是否可用
+         */
+        SET_CAN_USER_FLAG: (state, usernameCanUse) => {
+            state.usernameCanUse = usernameCanUse
+        },
     },
     actions: {
         //登录
@@ -105,6 +114,30 @@ const user = {
                 getWebLogList(username).then(res => {
                     console.error("store-----getWebLogList----->", res)
                     resolve(res)
+                })
+            })
+        },
+        CheckUsername({commit}, username) {
+            return new Promise((resolve, reject) => {
+                checkUsername(username).then(res => {
+                    //msg=用户名已存在, code=2001,
+                    if (res.data.code >= 2000) {
+                        commit('SET_CAN_USER_FLAG', false)
+                    } else {
+                        commit('SET_CAN_USER_FLAG', true)
+                    }
+                    resolve(res.data)
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
+        EditUserInfo({commit}, userInfo) {
+            return new Promise((resolve, reject) => {
+                editUserInfo(userInfo).then(res => {
+                    console.log("userInfo----->", userInfo)
+                    console.log("res----->", res)
+
                 })
             })
         }

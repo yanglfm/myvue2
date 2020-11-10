@@ -5,12 +5,12 @@
             <side-bar></side-bar>
         </div>
         <div class="main_div">
-            <div class="nav_bar">
+           <!-- <div class="nav_bar">
                 <nav-bar></nav-bar>
             </div>
             <div class="tag_div">
                 <tag-view></tag-view>
-            </div>
+            </div>-->
             <div class="content_div">
 
                 <div class="app_main">
