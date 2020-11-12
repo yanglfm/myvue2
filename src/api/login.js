@@ -34,12 +34,14 @@ export function addWebLog(log) {
     })
 }
 
-export function getWebLogList(username) {
+export function getWebLogList(params) {
     return request({
         url:'log/getWebLogList',
         method:'get',
         params:{
-            username:username
+            username:params.username,
+            pageNo:params.pageNo,
+            pageNum:params.pageNum,
         }
     })
 

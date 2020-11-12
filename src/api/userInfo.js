@@ -17,3 +17,21 @@ export function editUserInfo(userInfo) {
         data: userInfo,
     })
 }
+
+/*测试mock*/
+export function getDemoList() {
+    return request({
+        // url:'/user/getUser',
+        url: '/demo/demoList',
+        method: 'get',
+    })
+}
+
+export function updateUser(userInfo) {
+    return request({
+        // url:'/user/getUser',
+        url: '/demo/updateUser',
+        method: 'post',
+        data: userInfo,
+    })
+}

@@ -1,6 +1,6 @@
 import {getToken, setToken, removeToken} from "../../utils/auth";
 import {addWebLog, getWebLogList, login, loginOut, userInfo} from "../../api/login";
-import {checkUsername, editUserInfo} from "../../api/userInfo";
+import {checkUsername, editUserInfo, getDemoList, updateUser} from "../../api/userInfo";
 
 const user = {
     state: {
@@ -98,7 +98,6 @@ const user = {
         ,
         AddWebLog({commit}, data) {
             return new Promise((resolve, reject) => {
-                console.log("data--->", data)
                 let log = {
                     description: data.name,
                     contentPath: data.path,
@@ -109,10 +108,9 @@ const user = {
                 })
             })
         },
-        GetWebLogList({commit}, username) {
+        GetWebLogList({commit}, params) {
             return new Promise((resolve, reject) => {
-                getWebLogList(username).then(res => {
-                    console.error("store-----getWebLogList----->", res)
+                getWebLogList(params).then(res => {
                     resolve(res)
                 })
             })
@@ -125,7 +123,7 @@ const user = {
                         commit('SET_CAN_USER_FLAG', false)
                     } else {
                         commit('SET_CAN_USER_FLAG', true)
-                    }
+                    }getWebLogList
                     resolve(res.data)
                 }).catch(error => {
                     reject(error)
@@ -138,6 +136,21 @@ const user = {
                     console.log("userInfo----->", userInfo)
                     console.log("res----->", res)
 
+                })
+            })
+        },
+
+        GetDemoList({commit}) {
+            return new Promise((resolve, reject) => {
+                getDemoList().then(res => {
+                    resolve(res)
+                })
+            })
+        },
+        DoUpdateUser({commit}, userInfo) {
+            return new Promise((resolve, reject) => {
+                updateUser(userInfo).then(res => {
+                    resolve(res)
                 })
             })
         }

@@ -1,14 +1,22 @@
 <template>
     <div>
+        <!--为啥颜色改不了-->
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="密码" prop="pass">
-                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                <el-input type="password" v-model="ruleForm.pass" autocomplete="off">
+                    <i slot="prefix" class="el-input__icon el-icon-lock"></i>
+                </el-input>
             </el-form-item>
             <el-form-item label="确认密码" prop="checkPass">
-                <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+                <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off">
+                    <i slot="prefix" class="el-input__icon el-icon-lock"></i>
+                </el-input>
             </el-form-item>
+
             <el-form-item label="年龄" prop="age">
-                <el-input v-model.number="ruleForm.age"></el-input>
+                <el-input v-model.number="ruleForm.age">
+                    <i slot="prefix" class="el-input__icon el-icon-sunrise"></i>
+                </el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -31,8 +39,8 @@
                     if (!Number.isInteger(value)) {
                         callback(new Error('请输入数字值'));
                     } else {
-                        if (value < 18) {
-                            callback(new Error('必须年满18岁'));
+                        if (value < 10) {
+                            callback(new Error('必须年满10岁'));
                         } else {
                             callback();
                         }
