@@ -35,3 +35,11 @@ export function updateUser(userInfo) {
         data: userInfo,
     })
 }
+
+export function uploadFiles(fileParams) {
+    return request({
+        url:'/file/upload',
+        method:'post',
+        data:fileParams
+    })
+}

@@ -11,6 +11,7 @@ const getters = {
     rightNav: state => state.tagsView.rightNav,
     sidebar: state => state.app.sidebar,
     usernameCanUse:state=>state.user.usernameCanUse,
+    uploadFlag:state=>state.user.uploadFlag,
 
 }
 export default getters

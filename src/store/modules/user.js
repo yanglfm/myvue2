@@ -1,6 +1,6 @@
 import {getToken, setToken, removeToken} from "../../utils/auth";
 import {addWebLog, getWebLogList, login, loginOut, userInfo} from "../../api/login";
-import {checkUsername, editUserInfo, getDemoList, updateUser} from "../../api/userInfo";
+import {checkUsername, editUserInfo, getDemoList, updateUser, uploadFiles} from "../../api/userInfo";
 
 const user = {
     state: {
@@ -10,6 +10,7 @@ const user = {
         roles: [],//用户角色列表
         menus: [],//菜单列表
         usernameCanUse: false,
+        uploadFlag: false,
     },
     mutations: {
         SET_TOKEN: (state, token) => {
@@ -26,7 +27,6 @@ const user = {
         },
         SET_ROLES: (state, roles) => {
             state.roles = roles
-
         },
         /**
          * 添加路由日志
@@ -41,6 +41,12 @@ const user = {
         SET_CAN_USER_FLAG: (state, usernameCanUse) => {
             state.usernameCanUse = usernameCanUse
         },
+        /**
+         *设置上传文件的类别，添加请求头
+         */
+        SET_UPLOAD_FLAG: (state, flag) => {
+            state.uploadFlag = flag
+        }
     },
     actions: {
         //登录
@@ -123,7 +129,8 @@ const user = {
                         commit('SET_CAN_USER_FLAG', false)
                     } else {
                         commit('SET_CAN_USER_FLAG', true)
-                    }getWebLogList
+                    }
+                    getWebLogList
                     resolve(res.data)
                 }).catch(error => {
                     reject(error)
@@ -152,6 +159,18 @@ const user = {
                 updateUser(userInfo).then(res => {
                     resolve(res)
                 })
+            })
+        },
+        DoUploadFiles({commit}, fileParams) {
+            return new Promise((resolve, reject) => {
+                uploadFiles(fileParams).then(res => {
+                    resolve(res)
+                })
+            })
+        },
+        DoChangeUploadFlag({commit}, flag) {
+            return new Promise((resolve, reject) => {
+
             })
         }
     }
