@@ -1,6 +1,14 @@
 import {getToken, setToken, removeToken} from "../../utils/auth";
 import {addWebLog, getWebLogList, login, loginOut, userInfo} from "../../api/login";
-import {checkUsername, editUserInfo, getDemoList, updateUser, uploadFiles} from "../../api/userInfo";
+import {
+    addPath,
+    checkUsername,
+    editUserInfo,
+    getDemoList, getModule,
+    updateUser,
+    uploadFiles,
+    uploadMultiFiles
+} from "../../api/userInfo";
 
 const user = {
     state: {
@@ -171,6 +179,28 @@ const user = {
         DoChangeUploadFlag({commit}, flag) {
             return new Promise((resolve, reject) => {
 
+            })
+        },
+        DoUploadMultiFiles({commit}, files) {
+            return new Promise((resolve, reject) => {
+                uploadMultiFiles(files).then(res => {
+                    resolve(res)
+                })
+            })
+        },
+        AddPath({commit}, path) {
+            return new Promise((resolve, reject) => {
+                addPath(path).then(res => {
+                    resolve(res)
+                })
+            })
+        },
+        GetModule({commit}, roles) {
+            return new Promise((resolve, reject) => {
+                getModule(roles).then(res => {
+                    console.log("res----->"+res)
+                    resolve(res)
+                })
             })
         }
     }

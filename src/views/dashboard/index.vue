@@ -1,10 +1,10 @@
 <template>
     <div>
-        这是主页内容
+        这是主页内容，类似showDoc功能
         <div class="index_outer_div">
-            <div class="common_div">
-                <div>qqqww</div>
-                <div>ww</div>
+            <div class="common_div" style="cursor: pointer" @click="handleUrlClick">
+                <div>创建路由</div>
+                <div><i class="el-icon-edit" style="font-size: 28px"></i></div>
                 <div>eeee</div>
                 <div>rrrr</div>
                 <p class="item-tip">系</p></div>
@@ -33,7 +33,20 @@
 <!--/parameter/query-->
 <script>
     export default {
-        name: "index"
+        name: "index",
+        data() {
+            return {}
+        },
+        methods: {
+            handleUrlClick() {
+                console.log("添加URL，改变URL")
+                /**
+                 * 跳转页面
+                 * */
+                // this.$router.push({path: '/system/index'})
+                this.$router.push({path: '/auth/path'})
+            },
+        }
     }
 </script>
 
@@ -52,7 +65,8 @@
         position: relative;
 
     }
-    .common_div div{
+
+    .common_div div {
         text-align: left;
     }
 

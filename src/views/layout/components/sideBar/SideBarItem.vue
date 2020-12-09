@@ -4,9 +4,10 @@
 
         <div v-if="!item.hidden&&item.children" class="menu-wrapper">
 
+            <!--如果一级目录和二级目录相同，则可以选择走上面的这层渲染,需要添加name的备注，即item.children[0].name==='添加页面-->
             <template
                     v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)
-                    &&!item.alwaysShow&&item.children[0].name==='首页'">
+                    &&!item.alwaysShow&&(item.children[0].name==='首页'||item.children[0].name==='添加页面')">
                 <app-link :to="resolvePath(onlyOneChild.path)">
                     <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
                         <i :class="item.icon"></i>
@@ -15,6 +16,7 @@
                 </app-link>
             </template>
 
+            <!---->
             <el-submenu v-else :index="resolvePath(item.path)">
                 <template slot="title">
                     <i :class="item.icon"></i>

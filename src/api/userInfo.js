@@ -38,8 +38,37 @@ export function updateUser(userInfo) {
 
 export function uploadFiles(fileParams) {
     return request({
-        url:'/file/upload',
-        method:'post',
-        data:fileParams
+        url: '/file/uploading',
+        method: 'post',
+        data: fileParams
+    })
+}
+
+export function uploadMultiFiles(files) {
+    return request({
+        url: '/file/uploadMultiFilesNew',
+        method: 'post',
+        data: files
+    })
+}
+
+
+export function addPath(path) {
+    return request({
+        url: '/page/addPath',
+        method: 'post',
+        data: path,
+    })
+}
+
+
+export function getModule(roles) {
+    return request({
+        url: '/role/getUnauthorized',
+        method: 'get',
+        params: {
+            roleIds: roles,
+            roles: roles
+        }
     })
 }

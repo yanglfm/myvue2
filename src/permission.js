@@ -11,8 +11,8 @@ const whiteList = ['/login']//不重定向白名单
 
 router.beforeEach((to, from, next) => {
     NProgress.start()
-    console.log(getToken())
-    console.log(typeof getToken())
+    console.log("token--->" + getToken())
+    console.log("type of Token--->" + typeof getToken())
 
     if (getToken() && getToken() != "{\"id\":null,\"employeeCode\":null,\"username\":\"tom\",\"password\":\"123456\"}" && getToken() !== 'admin') {
 
